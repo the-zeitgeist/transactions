@@ -1,4 +1,4 @@
-import './banner.css';
+import { useContext } from 'react';
 import {
 	Box,
 	Toolbar,
@@ -8,9 +8,11 @@ import {
 	TextField,
 	InputAdornment,
 } from '@mui/material';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { makeStyles } from '@material-ui/core';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { StoreContext } from '../hooks/stateContext';
 import poliIcon from '../../assets/politecnico.jpg';
+import './banner.css';
 
 const useStyles = makeStyles((theme) => ({
 	image: {
@@ -35,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Banner = () => {
+	const [initialValue] = useContext(StoreContext).initialValue;
+	const [amount] = useContext(StoreContext).amount;
 	const classes = useStyles();
+
 	return (
 		<Box>
 			<AppBar position="fixed">
@@ -43,17 +48,18 @@ export const Banner = () => {
 					<IconButton>
 						<img src={poliIcon} alt="politecnico" className={classes.image} />
 					</IconButton>
-					<div className={classes.grow}></div>
+					<div className={classes.grow} />
 					<Typography variant="body1">
-						Parcial Programación Distribuida y paralela
+            Parcial Programación Distribuida y paralela
 					</Typography>
-					<div className={classes.grow}></div>
+					<div className={classes.grow} />
 					<TextField
 						disabled
 						id="initialBalance"
 						className={classes.input}
 						label="Saldo inicial"
-						defaultValue=""
+						defaultValue={0}
+						value={initialValue}
 						InputProps={{
 							startAdornment: (
 								<InputAdornment position="start">
@@ -68,7 +74,8 @@ export const Banner = () => {
 						id="finalBalance"
 						className={classes.input}
 						label="Saldo final"
-						defaultValue=""
+						defaultValue="0"
+						value={amount}
 						InputProps={{
 							startAdornment: (
 								<InputAdornment position="start">
@@ -82,7 +89,7 @@ export const Banner = () => {
 					/>
 				</Toolbar>
 			</AppBar>
-			<div className={classes.offset}></div>
+			<div className={classes.offset} />
 		</Box>
 	);
 };

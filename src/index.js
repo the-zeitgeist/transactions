@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { StoreProvider } from './components/hooks/stateContext';
+import './index.css';
 
 const theme = createTheme({
 	palette: {
@@ -21,7 +22,9 @@ const theme = createTheme({
 ReactDOM.render(
 	<React.StrictMode>
 		<ThemeProvider theme={theme}>
-			<App />
+			<StoreProvider>
+				<App />
+			</StoreProvider>
 		</ThemeProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
