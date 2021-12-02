@@ -1,22 +1,21 @@
 import { TransactionForm } from "./components/transactionForm/transactionForm";
 import { HistoricalTransactions } from "./components/historicalTransactions/historicalTransactions";
 import { StoreProvider } from "./components/hooks/stateContext";
+import Banner from './components/banner/Banner';
 import "./App.css";
 
-function App() {
-  return (
-    <StoreProvider>
-      <div className="main-container">
-        {/* Banner */}
-        <h1 style={{ color: "white" }}>Banner</h1>
-        <div className="transaction-container">
-          <TransactionForm />
-          <HistoricalTransactions />
-          <div />
-        </div>
+const App = () => (
+  <StoreProvider>
+    <div className="main-container">
+      <Banner />
+      <div className="transaction-container">
+        <TransactionForm />
+        <HistoricalTransactions />
+        <div />
       </div>
-    </StoreProvider>
-  );
-}
+    </div>
+  </StoreProvider>
+);
+
 
 export default App;
