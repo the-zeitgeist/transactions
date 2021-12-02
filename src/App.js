@@ -1,4 +1,5 @@
 import { TransactionForm } from "./components/transactionForm/transactionForm";
+import { HistoricalTransactions } from "./components/historicalTransactions/historicalTransactions";
 import "./App.css";
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
       <h1 style={{ color: "white" }}>Banner</h1>
       <div className="transaction-container">
         <TransactionForm formName="cool form" />
-        {/* history panel */}
+        <HistoricalTransactions />
         <div />
       </div>
     </div>

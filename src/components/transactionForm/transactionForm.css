@@ -1,4 +1,45 @@
 .transaction-form {
+  display: flex;
+  min-width: 400px;
+  flex-direction: column;
+  align-items:center;
+  padding: 1rem 3rem 4rem 3rem;
+}
+
+.transaction-form form {
   width: 100%;
-  height: 20rem;
+}
+
+.transaction-form form .input {
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.transaction-form form .input label {
+  font-size: 1rem;
+  font-family: bold;
+}
+
+.transaction-form form .input select,
+.transaction-form form .input option {
+  padding: 0.2rem 5rem;
+}
+
+.transaction-form form .input input {
+  padding: 0.2rem 0;
+  width: 14rem;
+}
+
+.transaction-form form .buttons-container {
+  width: 100%;
+  display: flex;
+  padding: 3rem 0 0 0;
+  justify-content: space-evenly;
+}
+
+.transaction-form form .buttons-container button {
+  padding: 0.5rem 1rem;
 }

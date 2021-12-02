@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Panel } from "../panel/panel";
 import "./transactionForm.css";
 
-export const TransactionForm = Panel(({panelName}) => {
+export const TransactionForm = Panel(() => {
   const [type, setType] = useState("income");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
@@ -19,8 +19,6 @@ export const TransactionForm = Panel(({panelName}) => {
 
   return (
     <div className="transaction-form">
-      <p>{panelName}</p>
-
       <form onSubmit={onSubmit}>
         <div className="input">
           <label htmlFor="type">Tipo de movimiento</label>
@@ -47,4 +45,4 @@ export const TransactionForm = Panel(({panelName}) => {
       </form>
     </div>
   );
-});
+}, 'Registro');

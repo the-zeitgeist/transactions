@@ -1,7 +1,14 @@
-import './panel.css';
+import "./panel.css";
 
-export const Panel = (Component) => ({...props}) => (
-  <div className="panel">
-    <Component {...props} />
-  </div>
-)
+export const Panel =
+  (Component, panelName, InnerComponent) =>
+  ({ ...props }) =>
+    (
+      <div className="panel">
+        <div className="panel-title">
+          <p>{panelName}</p>
+          {InnerComponent && <InnerComponent />}
+        </div>
+        <Component {...props} />
+      </div>
+    );
