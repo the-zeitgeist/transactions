@@ -2,5 +2,15 @@
   width: 100vw;
   min-height: 100vh;
   background-color: #090909;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 2rem;
 }
 
