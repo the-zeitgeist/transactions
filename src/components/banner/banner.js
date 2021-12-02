@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Banner = () => {
+export const Banner = () => {
 	const classes = useStyles();
 	return (
 		<Box>
@@ -86,5 +86,3 @@ const Banner = () => {
 		</Box>
 	);
 };
-
-export default Banner;

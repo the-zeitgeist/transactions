@@ -1,7 +1,7 @@
 import { TransactionForm } from "./components/transactionForm/transactionForm";
 import { HistoricalTransactions } from "./components/historicalTransactions/historicalTransactions";
 import { StoreProvider } from "./components/hooks/stateContext";
-import Banner from './components/banner/Banner';
+import { Banner } from './components/banner/banner';
 import "./App.css";
 
 const App = () => (
