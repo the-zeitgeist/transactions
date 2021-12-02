@@ -1,0 +1,16 @@
+.badge {
+	text-align: center;
+	width: 7rem;
+	padding: 0.3rem 2rem;
+	border-radius: 0.5rem;
+	color: #F9F9F9;
+	font-weight: bold;
+}
+
+.income {
+	background-color: green;
+}
+
+.expense {
+	background-color: red;
+}

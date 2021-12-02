@@ -1,0 +1,16 @@
+.filter {
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter .type {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter input {
+  padding: 0.2rem 1rem;
+}
+
