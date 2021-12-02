@@ -1,10 +1,10 @@
 .panel {
   width: 38rem;
   margin: 1rem;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   box-shadow: 0.1rem 0.1rem 0.3rem 0.2rem #888;
   border-radius: 0.5rem;
-  border: 1px solid #F9F9F9;
+  border: 1px solid #f9f9f9;
 }
 
 .panel .panel-title {
