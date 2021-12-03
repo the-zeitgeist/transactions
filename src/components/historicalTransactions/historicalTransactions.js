@@ -14,14 +14,27 @@ const Indicator = () => {
 export const HistoricalTransactions = Panel(
 	() => {
 		const [transactions, setTransactions] = useContext(StoreContext).movements;
+		const [, setEditMovement] = useContext(StoreContext).editMovement;
 		const [word, setWord] = useState('');
 		const [type, setType] = useState('all');
 
-		const onDelete = (transaction) => setTransactions((_transactions) => _transactions.filter((_transaction) => _transaction.id !== transaction.id));
+		const onDelete = (transaction) =>
+			setTransactions((_transactions) =>
+				_transactions.filter(
+					(_transaction) => _transaction.id !== transaction.id
+				)
+			);
+
+		const onChange = (transaction) => {
+			setEditMovement(transaction.id);
+		};
 
 		return (
 			<div className="historical-transactions">
-				<Filter onInputChange={(w) => setWord(w)} onTypeChange={(t) => setType(t)} />
+				<Filter
+					onInputChange={(w) => setWord(w)}
+					onTypeChange={(t) => setType(t)}
+				/>
 				<div className="transactions">
 					{transactions
 						.filter((t) => {
@@ -33,7 +46,12 @@ export const HistoricalTransactions = Panel(
 							return t.name.toLowerCase().includes(word.toLowerCase());
 						})
 						.map((transaction, i) => (
-							<TransactionItem key={i} {...transaction} onDelete={() => onDelete(transaction)} />
+							<TransactionItem
+								key={i}
+								{...transaction}
+								onDelete={() => onDelete(transaction)}
+								onChange={() => onChange(transaction)}
+							/>
 						))}
 				</div>
 			</div>
