@@ -1,14 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { StoreContext } from '../hooks/stateContext';
 import { useModal } from '../modal/modal';
 import { SuccessModal } from '../modal/modals/successModal';
 import { ErrorModal } from '../modal/modals/errorModal';
 import { Panel } from '../panel/panel';
 import { v4 as uuid } from 'uuid';
+import { TransactionFormRender } from './transactionFormRender';
+import { EditModal } from '../modal/modals/editModal';
 import './transactionForm.css';
-import TransactionFormRender from './transactionFormRender';
 
-export const TransactionForm = Panel(() => {
+export const TransactionForm = Panel(({ close }) => {
 	const [movements, setMovements] = useContext(StoreContext).movements;
 	const [editMovement, setEditMovement] = useContext(StoreContext).editMovement;
 	const [globalAmount] = useContext(StoreContext).amount;
@@ -18,6 +19,8 @@ export const TransactionForm = Panel(() => {
 	const [openError, ModalError] = useModal(({ err }) => (
 		<ErrorModal message={err} />
 	));
+	const [openEdit, ModalEdit, closeEdit] = useModal(EditModal);
+
 	const [type, setType] = useState('income');
 	const [name, setName] = useState('');
 	const [amount, setAmount] = useState(0);
@@ -25,20 +28,26 @@ export const TransactionForm = Panel(() => {
 
 	const onChange = (setterFunction) => (e) => {
 		e.persist();
+		console.log('change', e.target.name, e.target.value);
 		setterFunction(e.target.value);
 	};
 
+	const onCancel = useCallback(() => {
+		closeEdit()
+
+		setName('');
+		setAmount(0);
+		setType('income');
+		setEditMovement('');
+	}, [closeEdit, setEditMovement]);
+
 	useEffect(() => {
-		if (editMovement !== '') {
-			movements.map((m) => {
-				if (editMovement === m.id) {
-					setName(m.name);
-					setType(m.type);
-					setAmount(m.amount);
-				}
-			});
+		if (!editMovement) {
+			return
 		}
-	}, [editMovement]);
+
+		openEdit();
+	}, [editMovement, movements, onCancel, openEdit]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -62,36 +71,16 @@ export const TransactionForm = Panel(() => {
 			openError();
 			return;
 		}
-		console.log(type);
 
-		if (editMovement === '') {
-			setMovements((_movements) => [
-				..._movements,
-				{ name, amount: Number(amount), type, id: uuid() },
-			]);
-			openSuccess();
-			onCancel();
-		} else {
-			console.log('entro');
-			movements.map((m) => {
-				if (editMovement === m.id) {
-					m.name = name;
-					m.type = type;
-					m.amount = Number(amount);
-				}
-			});
-			setEditMovement('');
-			openSuccess();
-			onCancel();
-		}
+		setMovements((_movements) => [
+			..._movements,
+			{ name, amount: Number(amount), type, id: uuid() }
+		]);
+
+		openSuccess();
+		onCancel();
 	};
 
-	const onCancel = () => {
-		setName('');
-		setAmount(0);
-		setType('income');
-		setEditMovement('');
-	};
 
 	return (
 		<div className="transaction-form">
@@ -105,9 +94,22 @@ export const TransactionForm = Panel(() => {
 				setName={setName}
 				setType={setType}
 				setAmount={setAmount}
+				action='Agregar Movimiento'
 			/>
 			<ModalSuccess />
 			<ModalError err={err} />
+			<ModalEdit
+				onSubmit={onSubmit}
+				onChange={onChange}
+				name={name}
+				type={type}
+				amount={amount}
+				onCancel={onCancel}
+				setName={setName}
+				setType={setType}
+				setAmount={setAmount}
+				onUpdate={closeEdit}
+			/>
 			{err && <div className="error">{err}</div>}
 		</div>
 	);

@@ -4,12 +4,13 @@ export const StoreContext = createContext({
 	initialValue: [],
 	amount: [],
 	movements: [],
-	editMovement: [],
+	editMovement: []
 });
 
 export const StoreProvider = ({ children }) => {
-	const [initialValue, setInitialValue] = useState(0);
+	const [initialValue, setInitialValue] = useState(2000);
 	const [amount, setAmount] = useState(initialValue);
+	const [editMovement, setEditMovement] = useState('');
 	const [movements, setMovements] = useState([
 		{
 			id: 's1dfs',
@@ -24,7 +25,6 @@ export const StoreProvider = ({ children }) => {
 			amount: 500,
 		},
 	]);
-	const [editMovement, setEditMovement] = useState('');
 
 	useEffect(() => {
 		setAmount(() =>
@@ -33,15 +33,13 @@ export const StoreProvider = ({ children }) => {
 				initialValue
 			)
 		);
-		console.log(movements);
-		console.log(amount);
 	}, [movements, amount, initialValue, editMovement]);
 
 	const store = {
 		initialValue: [initialValue, setInitialValue],
 		amount: [amount, setAmount],
 		movements: [movements, setMovements],
-		editMovement: [editMovement, setEditMovement],
+		editMovement: [editMovement, setEditMovement]
 	};
 
 	return (

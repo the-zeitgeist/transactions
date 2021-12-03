@@ -28,6 +28,7 @@ export const useModal = (Component) => {
 			>
 				<Component {...props} open={open} close={close} />
 			</Modal>
-		)
+		),
+		close
 	];
 };

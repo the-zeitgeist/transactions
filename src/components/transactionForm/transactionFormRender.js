@@ -1,7 +1,4 @@
-import { useContext } from 'react';
-import { StoreContext } from '../hooks/stateContext';
-
-const TransactionFormRender = ({
+export const TransactionFormRender = ({
 	onSubmit,
 	onChange,
 	onCancel,
@@ -11,8 +8,8 @@ const TransactionFormRender = ({
 	setType,
 	setName,
 	setAmount,
+	action
 }) => {
-	const [editMovement] = useContext(StoreContext).editMovement;
 	return (
 		<div className="transaction-form">
 			<form onSubmit={onSubmit}>
@@ -39,7 +36,6 @@ const TransactionFormRender = ({
 					<input
 						type="number"
 						name="Amount"
-						min="0"
 						value={amount}
 						onChange={onChange(setAmount)}
 					/>
@@ -49,15 +45,9 @@ const TransactionFormRender = ({
 					<button type="button" onClick={onCancel}>
 						Cancelar
 					</button>
-					{editMovement === '' ? (
-						<button type="submit">Agregar Movimiento</button>
-					) : (
-						<button type="submit">Modificar</button>
-					)}
+					<button type="submit">{action}</button>
 				</div>
 			</form>
 		</div>
 	);
 };
-
-export default TransactionFormRender;
